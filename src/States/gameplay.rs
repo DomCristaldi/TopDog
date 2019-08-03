@@ -5,6 +5,9 @@ use amethyst::{
     renderer::{Camera, ImageFormat, SpriteRender, SpriteSheet, SpriteSheetFormat, Texture}
 };
 
+use crate::{
+    Entities::Paddle,
+};
 
 pub const ARENA_HEIGHT: f32 = 100.0;
 pub const ARENA_WIDTH: f32 = 100.0;
@@ -31,5 +34,8 @@ impl SimpleState for Gameplay {
         let world = data.world;
 
         initialize_camera(world);
+
+        Paddle::initialize_paddles(world);
+        //Paddle::load_prefab(world);
     }
 }

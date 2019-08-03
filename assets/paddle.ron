@@ -1,11 +1,13 @@
+#![enable(implicit_some)]
 
 Prefab (
     entities: [
-        (
-            data: (
-
-            )
-        )
+        PrefabEntity(
+            data: Paddle(
+                side: Left,
+                dimensions: Dimensions(4.0, 16.0),
+            ),
+        ),
     ],
 )
 

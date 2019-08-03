@@ -4,6 +4,7 @@ extern crate amethyst;
 
 use amethyst::{
     prelude::*,
+    assets::PrefabLoaderSystem,
     renderer::{
         plugins::{RenderFlat2D, RenderToWindow},
         types::DefaultBackend,
@@ -24,6 +25,11 @@ fn main() -> amethyst::Result<()> {
     let display_config_path = app_root.join("resources").join("display_config.ron");
 
     let game_data = GameDataBuilder::default()
+        .with(
+            PrefabLoaderSystem::<Entities::Paddle>::default(),
+            "paddle_loader",
+            &[]
+        )
         .with_bundle(
           RenderingBundle::<DefaultBackend>::new()
             // The RenderToWindow plugin provides all the scaffolding for opening a window and drawing on it
