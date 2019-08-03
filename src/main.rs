@@ -13,8 +13,10 @@ use amethyst::{
     utils::application_root_dir,
 };
 
+mod StaticData;
 mod States;
 mod Entities;
+mod Resources;
 
 
 fn main() -> amethyst::Result<()> {

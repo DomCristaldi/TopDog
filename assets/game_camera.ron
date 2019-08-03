@@ -3,9 +3,8 @@
 Prefab (
     entities: [
         PrefabEntity(
-            data: Paddle(
-                side: Left,
-                dimensions: Dimensions(4.0, 16.0),
+            data: GameCamera(
+                dimensions: Dimensions(100.0, 100.0),
             ),
         ),
     ],
