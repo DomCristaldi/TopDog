@@ -45,6 +45,22 @@ pub struct GameCamera
   pub dimensions: Resources::Dimensions,
 }
 
+/*impl PrefabData<'a> for GameCamera
+{
+  type SystemData = WriteStorage<'a, Dimensions>;
+
+  fn add_to_entity(
+        &self,
+        entity: Entity,
+        system_data: &mut Self::SystemData,
+        entities: &[Entity],
+        children: &[Entity],
+    ) -> Result<Self::Result, Error>
+    {
+
+    }
+}*/
+
 impl GameCamera
 {
   pub fn retrieve_prefab_handle(world: &mut World) -> Handle<Prefab<GameCamera>>
@@ -72,6 +88,7 @@ impl GameCamera
 
     world
         .create_entity()
+        .with(prefab_handle.clone())
         .with(Camera::standard_2d(StaticData::ARENA_WIDTH(), StaticData::ARENA_HEIGHT()))
         .with(transform)
         .build();

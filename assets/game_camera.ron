@@ -4,6 +4,7 @@ Prefab (
     entities: [
         PrefabEntity(
             data: GameCamera(
+                position: Position(50.0, 50.0, 10.0),
                 dimensions: Dimensions(100.0, 100.0),
             ),
         ),

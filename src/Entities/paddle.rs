@@ -21,6 +21,9 @@ use amethyst::{
         DenseVecStorage,
         WriteStorage 
         },
+    renderer::{
+        SpriteRender,
+    },
     utils::scene::BasicScenePrefab,
 };
 
@@ -30,7 +33,9 @@ use specs_derive::Component;
 /*use crate::{
     Resources::Dimensions,
 };*/
-use crate::Resources;
+use crate::{
+    Resources,
+};
 
 #[derive(Debug, PartialEq, Eq, Serialize, Deserialize, PrefabData)]
 pub enum Side
@@ -80,10 +85,18 @@ impl Paddle
 
         left_transform.set_translation_xyz(2.0, 50.0, 0.0);
 
+//        Resources::retrieve_spritesheet_handle(world).clone()
+
+        let sprite_render = SpriteRender{
+            sprite_sheet: Resources::retrieve_spritesheet_handle(world).clone(),
+            sprite_number: 0,
+        };
+
         world
             .create_entity()
             .with(prefab_handle.clone())
             .with(left_transform)
+            .with(sprite_render.clone())
             .build();
     }
 }

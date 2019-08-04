@@ -5,6 +5,7 @@ extern crate amethyst;
 use amethyst::{
     prelude::*,
     assets::PrefabLoaderSystem,
+    core::transform::TransformBundle,
     renderer::{
         plugins::{RenderFlat2D, RenderToWindow},
         types::DefaultBackend,
@@ -32,6 +33,11 @@ fn main() -> amethyst::Result<()> {
             "paddle_loader",
             &[]
         )
+        .with(
+            PrefabLoaderSystem::<Entities::GameCamera>::default(),
+            "game_camera_loader",
+            &[]
+        )
         .with_bundle(
           RenderingBundle::<DefaultBackend>::new()
             // The RenderToWindow plugin provides all the scaffolding for opening a window and drawing on it
@@ -44,7 +50,9 @@ fn main() -> amethyst::Result<()> {
             .with_plugin(
                 RenderFlat2D::default()
             ),
-        )?;
+        )?
+        .with_bundle(TransformBundle::new())?
+        ;
 
 
 
