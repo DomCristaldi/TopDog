@@ -42,6 +42,13 @@ pub enum Side
     Right,
 }
 
+pub enum MomentumProfile
+{
+    Ground(f32),
+    Air(f32),
+}
+
+
 #[derive(Debug, Serialize, Deserialize, PrefabData)]
 pub struct PaddleComponent
 {

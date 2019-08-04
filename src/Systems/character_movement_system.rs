@@ -34,11 +34,11 @@ impl<'s> System<'s> for CharacterMovementSystem
 
   fn run(&mut self, (mut input_status_components, mut transform_components): Self::SystemData)
   {
-    let current_time : Duration = Time::default().fixed_time();
+    let current_time : f32 = Time::default().fixed_seconds();
 
     for (input_status, transform) in (&mut input_status_components, &mut transform_components).join()
     {
-      transform.move_right(input_status.input_scale * current_time.as_secs_f32());
+      transform.move_right(input_status.input_scale * current_time);
     }
   }
 }

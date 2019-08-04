@@ -1,5 +1,5 @@
 #![allow(warnings)]
-#![feature(duration_float)]
+/*#![feature(duration_float)]*/
 
 extern crate amethyst;
 
@@ -62,7 +62,7 @@ fn main() -> amethyst::Result<()> {
 
 
 
-    let assets_dir = app_root.join("assets");
+    let assets_dir = app_root.join("resources").join("assets");
 
     let mut game = Application::new(assets_dir, States::Gameplay, game_data)?;
 
