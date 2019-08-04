@@ -4,6 +4,7 @@ use amethyst::{
     prelude::*,
     error::Error,
     core::transform::Transform,
+    core::Time,
     ecs::prelude::{
       Component,
       DenseVecStorage,

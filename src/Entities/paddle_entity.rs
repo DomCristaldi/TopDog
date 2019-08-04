@@ -74,7 +74,7 @@ impl PaddleEntity
             .with(PlayerAvatarComponent{
                 player_index: 0,
             })
-            //.with(CharacterMovementComponent{})
+            /*.with(CharacterMovementComponent::default())*/
             .build();
     }
 }

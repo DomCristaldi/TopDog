@@ -36,8 +36,6 @@ impl<'s> System<'s> for CharacterInputSystem
 
   fn run(&mut self, (device_input, player_avatar_components, mut input_status_components): Self::SystemData)
   {
-    //for (transform) in 
-    //for (device_input, input_status_component) in (device_input_list, &mut input_status_component_list).join()
     for (player_avatar, input_status) in (&player_avatar_components, &mut input_status_components).join()
     {
       // TODO: account for different players via index on characters
@@ -68,7 +66,7 @@ impl<'s> System<'s> for CharacterInputSystem
         None => (),
       }
 
-      println!("Movement: {:#?}", input_status);
+      //println!("Movement: {:#?}", input_status);
     }
   }
 }
