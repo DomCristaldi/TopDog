@@ -1,0 +1,12 @@
+(
+  axes: {
+    "paddle_moveRightLeft": Emulated(
+      pos: Key(Right),
+      neg: Key(Left),
+    )
+  },
+  actions: {
+    "jump": [ [Key(Up)] ],
+    "stomp": [ [Key(Down)] ],
+  },
+)
