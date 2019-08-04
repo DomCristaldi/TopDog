@@ -30,60 +30,30 @@ use amethyst::{
 use serde::{Deserialize, Serialize};
 use specs_derive::Component;
 
-/*use crate::{
-    Resources::Dimensions,
-};*/
 use crate::{
+    Components::{
+        PaddleComponent,
+        CharacterMovementComponent,
+        InputStatusComponent,
+        PlayerAvatarComponent,
+    },
     Resources,
 };
+/*use crate::{
+    
+};*/
 
-#[derive(Debug, PartialEq, Eq, Serialize, Deserialize, PrefabData)]
-pub enum Side
+pub struct PaddleEntity;
+
+impl PaddleEntity
 {
-    Left,
-    Right,
-}
-
-#[derive(Debug, Serialize, Deserialize, PrefabData)]
-pub struct Paddle
-{
-    pub side: Side,
-    pub dimensions: Resources::Dimensions,
-}
-
-impl Component for Paddle//use derive_new::new;
-{
-    type Storage = DenseVecStorage<Self>;
-}
-
-impl Paddle
-{
-    pub fn retrieve_prefab_handle(world: &mut World) -> Handle<Prefab<Paddle>>
-    {
-        let prefab_handle = world.exec(
-            |loader: PrefabLoader<'_, Paddle>|
-            {
-                loader.load(
-                    "paddle.ron",
-                    RonFormat,
-                    ()
-                )
-            }
-        );
-
-        return prefab_handle;
-    }
-
-
     pub fn initialize(world: &mut World)
     {
-        let prefab_handle: Handle<Prefab<Paddle>> = Paddle::retrieve_prefab_handle(world);
+        let prefab_handle: Handle<Prefab<PaddleComponent>> = PaddleComponent::retrieve_prefab_handle(world);
         //let prefab_handle: Handle<Prefab<Paddle>> = Resources::DataBase::retrieve_prefab_handle(world, "paddle.ron");
 
-        let mut left_transform = Transform::default();
-        let mut right_transform = Transform::default();
-
-        left_transform.set_translation_xyz(2.0, 50.0, 0.0);
+        let mut transform = Transform::default();
+        transform.set_translation_xyz(2.0, 50.0, 0.0);
 
 //        Resources::retrieve_spritesheet_handle(world).clone()
 
@@ -95,8 +65,16 @@ impl Paddle
         world
             .create_entity()
             .with(prefab_handle.clone())
-            .with(left_transform)
+            .with(transform)
             .with(sprite_render.clone())
+            .with(InputStatusComponent{
+                input_scale: 0.0,
+                b_wants_jump: false,
+                b_wants_stomp: false,})
+            .with(PlayerAvatarComponent{
+                player_index: 0,
+            })
+            //.with(CharacterMovementComponent{})
             .build();
     }
 }

@@ -17,40 +17,58 @@ use amethyst::{
   },
 };
 
-pub struct CharacterInpoutSystem;
+use crate::{
+  Components::{
+    InputStatusComponent,
+    PlayerAvatarComponent,
+    },
+};
 
-impl<'s> System<'s> for CharacterInpoutSystem
+pub struct CharacterInputSystem;
+
+impl<'s> System<'s> for CharacterInputSystem
 {
   type SystemData = (
-    WriteStorage<'s, Transform>,
-    //ReadStorage<'s, >
     Read<'s, InputHandler<StringBindings>>,
+    ReadStorage<'s, PlayerAvatarComponent>,
+    WriteStorage<'s, InputStatusComponent>,
   );
 
-  fn run(&mut self, (mut transforms, input): Self::SystemData)
+  fn run(&mut self, (device_input, player_avatar_components, mut input_status_components): Self::SystemData)
   {
     //for (transform) in 
-    for transform in transforms.join()
+    //for (device_input, input_status_component) in (device_input_list, &mut input_status_component_list).join()
+    for (player_avatar, input_status) in (&player_avatar_components, &mut input_status_components).join()
     {
       // TODO: account for different players via index on characters
 
-      match input.axis_value("paddle_moveRightLeft")
+      match device_input.axis_value("moveLeftRight")
       {
         Some(movement_input) => {
-          println!("Movement: {}", movement_input);
+          input_status.input_scale = movement_input;
         },
-        None => {
-          println!("no input found");
-        },
+        None => (),
       }
 
-      /*let Some(movement_input) = input.axis_value("paddle_moveRightLeft");
-
-      if (movement_input != 0.0)
+      match device_input.action_is_down("jump")
       {
-        match(movement_input)
-        
-      }*/
+        Some(jump_input) =>
+        {
+          input_status.b_wants_jump = jump_input;
+        },
+        None => (),
+      }
+
+      match device_input.action_is_down("stomp")
+      {
+        Some(stomp_input) =>
+        {
+          input_status.b_wants_stomp = stomp_input;
+        },
+        None => (),
+      }
+
+      println!("Movement: {:#?}", input_status);
     }
   }
 }

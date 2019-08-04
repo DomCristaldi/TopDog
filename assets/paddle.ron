@@ -3,7 +3,7 @@
 Prefab (
     entities: [
         PrefabEntity(
-            data: Paddle(
+            data: PaddleComponent(
                 side: Left,
                 dimensions: Dimensions(4.0, 16.0),
             ),

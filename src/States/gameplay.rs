@@ -6,7 +6,7 @@ use amethyst::{
 
 use crate::{
     Entities::{
-        Paddle,
+        PaddleEntity,
         GameCamera,
     },
     StaticData::StaticData,
@@ -35,6 +35,6 @@ impl SimpleState for Gameplay {
         //initialize_camera(world);
 
         GameCamera::initialize(world);
-        Paddle::initialize(world);
+        PaddleEntity::initialize(world);
     }
 }

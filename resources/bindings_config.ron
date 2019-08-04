@@ -1,6 +1,6 @@
 (
   axes: {
-    "paddle_moveRightLeft": Emulated(
+    "moveLeftRight": Emulated(
       pos: Key(Right),
       neg: Key(Left),
     )

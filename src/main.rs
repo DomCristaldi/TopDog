@@ -23,6 +23,7 @@ mod States;
 mod Entities;
 mod Resources;
 mod Systems;
+mod Components;
 
 
 fn main() -> amethyst::Result<()> {
@@ -34,13 +35,13 @@ fn main() -> amethyst::Result<()> {
     let input_binding_path = app_root.join("resources").join("bindings_config.ron");
 
     let game_data = GameDataBuilder::default()
-        .with( PrefabLoaderSystem::<Entities::Paddle>::default(), "paddle_loader", &[] )
+        .with( PrefabLoaderSystem::<Components::PaddleComponent>::default(), "paddle_loader", &[] )
         .with( PrefabLoaderSystem::<Entities::GameCamera>::default(), "game_camera_loader", &[] )
         .with_bundle(
             InputBundle::<StringBindings>::new()
                 .with_bindings_from_file(input_binding_path)?,
         )?
-        .with(Systems::CharacterInpoutSystem, "character_input_system", &["input_system"])
+        .with(Systems::CharacterInputSystem, "character_input_system", &["input_system"])
         .with_bundle(
           RenderingBundle::<DefaultBackend>::new()
             // The RenderToWindow plugin provides all the scaffolding for opening a window and drawing on it
