@@ -32,8 +32,11 @@ fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
 
     let app_root = application_root_dir()?;
+
     let display_config_path = app_root.join("resources").join("display_config.ron");
-    let input_binding_path = app_root.join("resources").join("bindings_config.ron");
+    let input_binding_path  = app_root.join("resources").join("bindings_config.ron");
+    let assets_dir          = app_root.join("assets");
+
 
     let game_data = GameDataBuilder::default()
         .with( PrefabLoaderSystem::<Components::PaddleComponent>::default(), "paddle_loader", &[] )
@@ -59,10 +62,6 @@ fn main() -> amethyst::Result<()> {
         )?
         .with_bundle(TransformBundle::new())?
         ;
-
-
-
-    let assets_dir = app_root.join("resources").join("assets");
 
     let mut game = Application::new(assets_dir, States::Gameplay, game_data)?;
 

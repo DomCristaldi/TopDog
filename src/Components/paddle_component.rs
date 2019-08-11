@@ -30,6 +30,8 @@ use amethyst::{
 use serde::{Deserialize, Serialize};
 use specs_derive::Component;
 
+//use derivative::Derivative;
+
 use crate::{
     Resources,
 };
@@ -42,11 +44,16 @@ pub enum Side
     Right,
 }
 
+/*#[derive(Clone, Copy, Component, Debug, Derivative, Deserialize, Serialize, PrefabData)]
+#[derivative(Default)]
+#[prefab(Component)]
+#[storage(VecStorage)]
 pub enum MomentumProfile
 {
+    #[derivative(Default)]
     Ground(f32),
     Air(f32),
-}
+}*/
 
 
 #[derive(Debug, Serialize, Deserialize, PrefabData)]
