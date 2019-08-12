@@ -1,24 +1,15 @@
 use amethyst::{
-    prelude::*,
     error::Error,
     assets::{
-        AssetStorage,
-        Handle,
-        Prefab,
         PrefabData,
-        PrefabLoader,
-        PrefabLoaderSystem,
-        ProgressCounter,
-        RonFormat
-        },
-    core::transform::Transform,
+    },
     derive::PrefabData,
     ecs::Entity,
     ecs::prelude::{
         Component,
         DenseVecStorage,
         WriteStorage 
-        },
+    },
     utils::scene::BasicScenePrefab,
 };
 
