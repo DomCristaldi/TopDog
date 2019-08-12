@@ -24,21 +24,17 @@ use {
 };
 
 use crate::{
-  Resources::Dimensions,
+  Components::{
+    Dimensions,
+  },
 };
 
 
 #[derive(Debug, Serialize, Deserialize, PrefabData)]
 pub struct PaddlePrefab
 {
-    // pub side: Side,
     pub dimensions: Dimensions,
 }
-
-/*impl Component for PaddleComponent //use derive_new::new;
-{
-    type Storage = DenseVecStorage<Self>;
-}*/
 
 impl PaddlePrefab
 {

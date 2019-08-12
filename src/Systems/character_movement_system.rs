@@ -23,11 +23,9 @@ use std::time::Duration;
 
 use crate::{
   Components::{
+    Dimensions,
     InputStatusComponent,
   },
-  Resources::{
-    Dimensions,
-  }
 };
 
 pub struct CharacterMovementSystem;

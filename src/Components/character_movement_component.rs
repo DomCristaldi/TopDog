@@ -12,7 +12,7 @@ use amethyst::{
 };
 
 use crate::{
-	Resources::{
+	Components::{
 		Velocity2D,
 	},
 };

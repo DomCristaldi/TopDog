@@ -35,14 +35,19 @@ use amethyst::{
 use serde::{Deserialize, Serialize};
 use specs_derive::Component;
 
-use crate::StaticData::StaticData;
-use crate::Resources;
+use crate::{
+  Components::{
+    Dimensions,
+    Position,
+  },
+  StaticData::StaticData,
+};
 
 #[derive(Debug, Serialize, Deserialize, PrefabData)]
 pub struct GameCamera
 {
-  pub position: Resources::Position,
-  pub dimensions: Resources::Dimensions,
+  pub position: Position,
+  pub dimensions: Dimensions,
 }
 
 /*impl PrefabData<'a> for GameCamera
