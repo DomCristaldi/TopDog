@@ -19,7 +19,7 @@ use amethyst::{
     ecs::prelude::{
         Component,
         DenseVecStorage,
-        WriteStorage 
+        WriteStorage
         },
     renderer::{
         SpriteRender,
@@ -37,12 +37,12 @@ use crate::{
 };
 
 
-#[derive(Debug, PartialEq, Eq, Serialize, Deserialize, PrefabData)]
+/*#[derive(Debug, PartialEq, Eq, Serialize, Deserialize, PrefabData)]
 pub enum Side
 {
     Left,
     Right,
-}
+}*/
 
 /*#[derive(Clone, Copy, Component, Debug, Derivative, Deserialize, Serialize, PrefabData)]
 #[derivative(Default)]
@@ -56,24 +56,25 @@ pub enum MomentumProfile
 }*/
 
 
+
 #[derive(Debug, Serialize, Deserialize, PrefabData)]
-pub struct PaddleComponent
+pub struct PaddlePrefab
 {
-    pub side: Side,
+    // pub side: Side,
     pub dimensions: Resources::Dimensions,
 }
 
-impl Component for PaddleComponent //use derive_new::new;
+/*impl Component for PaddleComponent //use derive_new::new;
 {
     type Storage = DenseVecStorage<Self>;
-}
+}*/
 
-impl PaddleComponent
+impl PaddlePrefab
 {
-  pub fn retrieve_prefab_handle(world: &mut World) -> Handle<Prefab<PaddleComponent>>
+  pub fn retrieve_prefab_handle(world: &mut World) -> Handle<Prefab<PaddlePrefab>>
     {
         let prefab_handle = world.exec(
-            |loader: PrefabLoader<'_, PaddleComponent>|
+            |loader: PrefabLoader<'_, PaddlePrefab>|
             {
                 loader.load(
                     "paddle.ron",

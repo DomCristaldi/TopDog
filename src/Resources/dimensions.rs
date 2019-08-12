@@ -28,11 +28,14 @@ use specs_derive::Component;
 
 #[derive(Clone, Copy, Debug, Default, Component, Serialize, Deserialize, PrefabData)]
 #[prefab(Component)]
+#[serde(deny_unknown_fields)]
 pub struct Dimensions(pub f32, pub f32);
 
 #[derive(Clone, Copy, Debug, Default, Component, Serialize, Deserialize, PrefabData)]
 #[prefab(Component)]
+#[serde(deny_unknown_fields)]
 pub struct Position(pub f32, pub f32, pub f32);
 
 #[derive(Clone, Copy, Debug, Default, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Velocity2D(pub f32, pub f32);

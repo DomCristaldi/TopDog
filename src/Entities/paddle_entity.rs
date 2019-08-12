@@ -32,7 +32,7 @@ use specs_derive::Component;
 
 use crate::{
     Components::{
-        PaddleComponent,
+        PaddlePrefab,
         CharacterMovementComponent,
         InputStatusComponent,
         PlayerAvatarComponent,
@@ -43,13 +43,14 @@ use crate::{
     
 };*/
 
+#[derive(Debug)]
 pub struct PaddleEntity;
 
 impl PaddleEntity
 {
     pub fn initialize(world: &mut World)
     {
-        let prefab_handle: Handle<Prefab<PaddleComponent>> = PaddleComponent::retrieve_prefab_handle(world);
+        let prefab_handle: Handle<Prefab<PaddlePrefab>> = PaddlePrefab::retrieve_prefab_handle(world);
         //let prefab_handle: Handle<Prefab<Paddle>> = Resources::DataBase::retrieve_prefab_handle(world, "paddle.ron");
 
         let mut transform = Transform::default();
@@ -67,10 +68,7 @@ impl PaddleEntity
             .with(prefab_handle.clone())
             .with(transform)
             .with(sprite_render.clone())
-            .with(InputStatusComponent{
-                input_scale: 0.0,
-                b_wants_jump: false,
-                b_wants_stomp: false,})
+            .with(InputStatusComponent::default())
             .with(PlayerAvatarComponent{
                 player_index: 0,
             })

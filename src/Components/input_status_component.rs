@@ -23,5 +23,17 @@ pub struct InputStatusComponent
 impl Component for InputStatusComponent
 {
   type Storage = DenseVecStorage<Self>;
+}
 
+impl Default for InputStatusComponent
+{
+  fn default() -> InputStatusComponent
+  {
+    InputStatusComponent
+    {
+      input_scale: 0.0,
+      b_wants_jump: false,
+      b_wants_stomp: false,
+    }
+  }
 }
