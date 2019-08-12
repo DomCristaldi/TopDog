@@ -9,6 +9,3 @@ pub use self::player_avatar_component::PlayerAvatarComponent;
 
 mod simple;
 pub use self::simple::*;
-/*pub use self::simple::Dimensions as Simple::Dimensions;
-pub use self::simple::Position as Simple::Position;
-pub use self::simple::Velocity2D as Velocity2D;*/

@@ -1,7 +1,6 @@
 extern crate amethyst;
 
 use amethyst::{
-	prelude::*,
 	error::Error,
 	core::transform::Transform,
 	ecs::prelude::{
