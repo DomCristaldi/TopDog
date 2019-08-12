@@ -32,10 +32,12 @@ use specs_derive::Component;
 
 use crate::{
     Components::{
-        PaddlePrefab,
         CharacterMovementComponent,
         InputStatusComponent,
         PlayerAvatarComponent,
+    },
+    Prefabs::{
+        PaddlePrefab,
     },
     Resources,
 };

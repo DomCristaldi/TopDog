@@ -56,7 +56,7 @@ pub enum MomentumProfile
 }*/
 
 
-
+/*
 #[derive(Debug, Serialize, Deserialize, PrefabData)]
 pub struct PaddlePrefab
 {
@@ -87,3 +87,4 @@ impl PaddlePrefab
         return prefab_handle;
     }
 }
+*/

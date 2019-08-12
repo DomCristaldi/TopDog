@@ -1,10 +1,19 @@
 use {
   amethyst::{
     assets::{
-      PrefabData
+      Handle,
+      Prefab,
+      PrefabData,
+      PrefabLoader,
+      RonFormat,
+      ProgressCounter,
+    },
+    derive::{
+      PrefabData,
     },
     ecs::{
       Entity,
+      World,
     },
     error::Error,
   },
@@ -18,40 +27,34 @@ use crate::{
   Resources::Dimensions,
 };
 
-/*#[derive(Debug, Deserialize, Serialize, PrefabData)]
-pub struct PaddlePrefabData
-{
-  dimensions: Dimensions,
-}*/
 
-
-/*#[derive(Clone, Copy, PartialEq, Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PrefabData)]
 pub struct PaddlePrefab
 {
-
+    // pub side: Side,
+    pub dimensions: Dimensions,
 }
 
-impl<'a> PrefabData<'a> for PaddlePrefab
+/*impl Component for PaddleComponent //use derive_new::new;
 {
-    type SystemData = (
-
-    );
-
-    type Result = ();
-
-    fn add_to_entity(
-        &self,
-        entity: Entity,
-        system_data: &mut Self::SystemData,
-        entities: &[Entity],
-        children: &[Entity]
-    ) -> Result<(), Error>
-    {
-
-
-      //system_data.insert(entity, ).map(|_| ())?;
-
-      return Ok(());
-    }
-    
+    type Storage = DenseVecStorage<Self>;
 }*/
+
+impl PaddlePrefab
+{
+  pub fn retrieve_prefab_handle(world: &mut World) -> Handle<Prefab<PaddlePrefab>>
+    {
+        let prefab_handle = world.exec(
+            |loader: PrefabLoader<'_, PaddlePrefab>|
+            {
+                loader.load(
+                    "paddle.ron",
+                    RonFormat,
+                    ()
+                )
+            }
+        );
+
+        return prefab_handle;
+    }
+}
