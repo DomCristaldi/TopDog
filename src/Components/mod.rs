@@ -21,6 +21,6 @@ pub use self::simple::*;
 
 mod character_attributes;
 pub use self::character_attributes::*;
-/*pub use self::character_attributes::AttributeCategory;
-pub use self::character_attributes::CharacterAttributes;
-pub use self::character_attributes::CharacterAttributeData;*/
+
+mod velocity_component;
+pub use self::velocity_component::{Velocity2D, Velocity2D_Init};
