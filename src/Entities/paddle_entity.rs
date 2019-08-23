@@ -36,6 +36,7 @@ use crate::{
         InputStatusComponent,
         PlayerAvatarComponent,
         Velocity2D,
+        Velocity2D_Init,
         CharacterMovementStateComponent,
     },
     Prefabs::{
@@ -76,7 +77,8 @@ impl PaddleEntity
             .with(PlayerAvatarComponent{
                 player_index: 0,
             })
-            //.with(CharacterMovementStateComponent::default())
+            .with(CharacterMovementStateComponent::default())
+            .with(Velocity2D::new(Velocity2D_Init::Components(0.0, 0.0)))
             //.with(Velocity2D::default())
             //.with(CharacterMovementComponent)
             .build();

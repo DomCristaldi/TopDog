@@ -39,26 +39,41 @@ impl Component for Velocity2D
     type Storage = DenseVecStorage<Self>;
 }
 
-//pub struct Velocity2D(pub f32, pub f32);
+pub enum Velocity2D_Init
+{
+    Components(f32, f32),
+    Vector(math::Vector2<f32>),
+}
 
 impl Default for Velocity2D
 {
     fn default() -> Velocity2D
     {
-        Velocity2D
-        {
+        Velocity2D{
             vel: math::Vector2::new(0.0, 0.0),
         }
     }
 }
 
-
 impl Velocity2D
 {
-    pub fn new(&mut self, x: f32, y: f32) -> Velocity2D
+    pub fn new(init: Velocity2D_Init) -> Velocity2D
     {
-        Velocity2D{
-            vel: math::Vector2::new(x, y),
+        match init
+        {
+            Velocity2D_Init::Components(x, y) =>
+            {
+                Velocity2D {
+                    vel: math::Vector2::new(x, y),
+                }
+            },
+            Velocity2D_Init::Vector(input_vector) =>
+            {
+                Velocity2D {
+                    vel: input_vector,
+                }
+            },
+            _ => Velocity2D::default()
         }
     }
 
@@ -66,11 +81,17 @@ impl Velocity2D
     {
         let to_target: math::Vector2<f32> = target.vel - self.vel;
         
-        let direc: math::Vector2<f32> = math::Matrix::normalize(&to_target);
         let mag: f32 = math::Matrix::magnitude(&to_target);
+        if (mag == 0.0)
+        {
+            return;
+        }
 
-        let new_mag: f32 = math::clamp(max_magnitude_delta.clone(), 0.0, mag);
+        let direc: math::Vector2<f32> = math::Matrix::normalize(&to_target);
 
-        self.vel = direc * new_mag;
+        //let clamp_max = math::RealField::abs(&max_magnitude_delta);
+        let new_mag: f32 = math::clamp(mag, 0.0, max_magnitude_delta.abs());
+
+        self.vel += direc * new_mag;
     }
 }
