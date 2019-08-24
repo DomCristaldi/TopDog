@@ -4,6 +4,11 @@ Prefab(
         PrefabEntity(
             // parent: None // Optional
             data: PaddlePrefab(
+                character_movement: CharacterMovementStateComponent(
+                    accel:  5.0,
+                    decel: 10.0,
+                    max_speed: 5.0,
+                ),
                 dimensions: Dimensions(4.0, 16.0),
             ),
         ),

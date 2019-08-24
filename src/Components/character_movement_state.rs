@@ -1,13 +1,21 @@
 use amethyst::{
+  assets::PrefabData,
+  derive::PrefabData,
+  error::Error,
   /*core::{
     math,
   },*/
+  ecs::Entity,
   ecs::prelude::{
     Component,
     DenseVecStorage,
     WriteStorage,
   }
 };
+
+use serde::{Deserialize, Serialize};
+use specs_derive::Component;
+
 
 pub enum MovementContext
 {
@@ -16,7 +24,11 @@ pub enum MovementContext
   Stomp,
 }
 
-#[derive(Debug)]
+//#[derive(Debug, Clone, Debug, Serialize, Deserialize)]
+
+#[derive(Clone, Copy, Debug, Serialize, Deserialize, PrefabData)]
+#[prefab(Component)]
+#[serde(deny_unknown_fields)]
 pub struct CharacterMovementStateComponent
 {
   //pub context: MovementContext,

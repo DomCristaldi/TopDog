@@ -32,12 +32,13 @@ use specs_derive::Component;
 
 use crate::{
     Components::{
-        CharacterMovementComponent,
+        //CharacterMovementComponent,
         InputStatusComponent,
         PlayerAvatarComponent,
         Velocity2D,
         Velocity2D_Init,
         CharacterMovementStateComponent,
+        Dimensions,
     },
     Prefabs::{
         PaddlePrefab,
@@ -61,7 +62,7 @@ impl PaddleEntity
         let mut transform = Transform::default();
         transform.set_translation_xyz(2.0, 50.0, 0.0);
 
-//        Resources::retrieve_spritesheet_handle(world).clone()
+        //Resources::retrieve_spritesheet_handle(world).clone()
 
         let sprite_render = SpriteRender{
             sprite_sheet: Resources::retrieve_spritesheet_handle(world).clone(),
@@ -77,10 +78,7 @@ impl PaddleEntity
             .with(PlayerAvatarComponent{
                 player_index: 0,
             })
-            .with(CharacterMovementStateComponent::default())
             .with(Velocity2D::new(Velocity2D_Init::Components(0.0, 0.0)))
-            //.with(Velocity2D::default())
-            //.with(CharacterMovementComponent)
             .build();
     }
 }
