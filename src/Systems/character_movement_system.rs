@@ -51,7 +51,7 @@ impl<'s> System<'s> for CharacterMovementSystem
 
     for (input_status, character_movement, velocity, transform) in (&input_status_components, &character_movement_components, &mut velocity_components, &mut transform_components).join()
     {
-      let delta_vel: f32 = if input_status.input_scale.abs() > 0.0 {
+      let delta_vel: f32 = if (input_status.input_scale.abs() > 0.0) && (input_status.input_scale.signum() == velocity.vel.x.signum()) {
         character_movement.accel * delta_time } else {
         -1.0 * character_movement.decel * delta_time };
 
