@@ -23,6 +23,7 @@ mod StaticData;
 mod States;
 mod Entities;
 mod Resources;
+mod DataTypes;
 mod Systems;
 mod Components;
 mod Prefabs;
@@ -47,6 +48,7 @@ fn main() -> amethyst::Result<()> {
         )?
         .with(Systems::CharacterInputSystem, "character_input_system", &["input_system"])
         .with(Systems::CharacterMovementSystem, "character_movement_system", &["character_input_system"])
+        .with(Systems::EntityMoverSystem, "entity_mover_system", &["character_movement_system"])
         .with_bundle(
           RenderingBundle::<DefaultBackend>::new()
             // The RenderToWindow plugin provides all the scaffolding for opening a window and drawing on it

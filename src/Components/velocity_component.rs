@@ -22,7 +22,8 @@ use specs_derive::Component;
 #[serde(deny_unknown_fields)]
 pub struct Velocity2D
 {
-    pub vel: math::Vector2<f32>,
+    //pub vel: math::Vector2<f32>,
+    pub vel: math::Vector3<f32>,
 }
 impl Component for Velocity2D
 {
@@ -31,8 +32,8 @@ impl Component for Velocity2D
 
 pub enum Velocity2D_Init
 {
-    Components(f32, f32),
-    Vector(math::Vector2<f32>),
+    Components(f32, f32, f32),
+    Vector(math::Vector3<f32>),
 }
 
 impl Default for Velocity2D
@@ -40,7 +41,7 @@ impl Default for Velocity2D
     fn default() -> Velocity2D
     {
         Velocity2D{
-            vel: math::Vector2::new(0.0, 0.0),
+            vel: math::Vector3::new(0.0, 0.0, 0.0),
         }
     }
 }
@@ -51,10 +52,10 @@ impl Velocity2D
     {
         match init
         {
-            Velocity2D_Init::Components(x, y) =>
+            Velocity2D_Init::Components(x, y, z) =>
             {
                 Velocity2D {
-                    vel: math::Vector2::new(x, y),
+                    vel: math::Vector3::new(x, y, z),
                 }
             },
             Velocity2D_Init::Vector(input_vector) =>
@@ -69,7 +70,7 @@ impl Velocity2D
 
     pub fn MoveTowards(&mut self, target: &Velocity2D, max_magnitude_delta: &f32)
     {
-        let to_target: math::Vector2<f32> = target.vel - self.vel;
+        let to_target: math::Vector3<f32> = target.vel - self.vel;
         
         let mag: f32 = math::Matrix::magnitude(&to_target);
         if (mag == 0.0)
@@ -77,7 +78,7 @@ impl Velocity2D
             return;
         }
 
-        let direc: math::Vector2<f32> = math::Matrix::normalize(&to_target);
+        let direc: math::Vector3<f32> = math::Matrix::normalize(&to_target);
 
         //let clamp_max = math::RealField::abs(&max_magnitude_delta);
         let new_mag: f32 = math::clamp(mag, 0.0, max_magnitude_delta.abs());

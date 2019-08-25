@@ -25,16 +25,21 @@ use {
 
 use crate::{
   Components::{
-    CharacterMovementStateComponent,
     Dimensions,
+    Movement::{
+      CharacterMovementStateComponent,
+      CharacterJumpStateComponent,
+    },
   },
 };
 
 
 #[derive(Debug, Serialize, Deserialize, PrefabData)]
+#[serde(deny_unknown_fields)]
 pub struct PaddlePrefab
 {
   pub character_movement: CharacterMovementStateComponent,
+  pub jump_movement: CharacterJumpStateComponent,
   pub dimensions: Dimensions,
 }
 

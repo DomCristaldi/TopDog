@@ -37,8 +37,10 @@ use crate::{
         PlayerAvatarComponent,
         Velocity2D,
         Velocity2D_Init,
-        CharacterMovementStateComponent,
         Dimensions,
+        Movement::{
+            CharacterMovementStateComponent,
+        },
     },
     Prefabs::{
         PaddlePrefab,
@@ -78,7 +80,7 @@ impl PaddleEntity
             .with(PlayerAvatarComponent{
                 player_index: 0,
             })
-            .with(Velocity2D::new(Velocity2D_Init::Components(0.0, 0.0)))
+            .with(Velocity2D::new(Velocity2D_Init::Components(0.0, 0.0, 0.0)))
             .build();
     }
 }
