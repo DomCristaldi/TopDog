@@ -19,7 +19,7 @@ use serde::{ Serialize, Deserialize };
 pub struct CharacterJumpStateComponent
 {
   pub max_jump_height:f32,
-
+  pub time_to_max_height_sec: f32,
 }
 
 impl Component for CharacterJumpStateComponent

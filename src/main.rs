@@ -27,6 +27,7 @@ mod DataTypes;
 mod Systems;
 mod Components;
 mod Prefabs;
+mod Utility;
 
 fn main() -> amethyst::Result<()> {
 

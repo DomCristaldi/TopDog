@@ -2,6 +2,7 @@ use amethyst::{
   core::{
     Time,
   },
+  core::math::Point3,
   ecs::{
     Component,
     DenseVecStorage,
@@ -15,16 +16,18 @@ use std::{
 
 pub struct JumpStatusComponent
 {
-  take_off_moment: Instant,
-  has_reached_apex: bool,
+  pub jump_begin_loc: Point3<f32>,
+  pub jump_begin_moment: Instant,
+  pub has_reached_apex: bool,
 }
 
 impl JumpStatusComponent
 {
-  pub fn new(jump_begin: Instant) -> JumpStatusComponent
+  pub fn new(where_pos: Point3<f32>, when_time: Instant) -> JumpStatusComponent
   {
     JumpStatusComponent{
-      take_off_moment: jump_begin,
+      jump_begin_loc: where_pos,
+      jump_begin_moment: when_time,
       has_reached_apex: false,
     }
   }

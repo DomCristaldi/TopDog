@@ -21,7 +21,7 @@ use crate::{
   Components::{
     InputStatusComponent,
     PlayerAvatarComponent,
-    },
+  },
 };
 
 pub struct CharacterInputSystem;
