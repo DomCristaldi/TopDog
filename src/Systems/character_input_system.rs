@@ -21,6 +21,9 @@ use crate::{
   Components::{
     InputStatusComponent,
     PlayerAvatarComponent,
+    Status::{
+      JumpStatusComponent,
+    }
   },
 };
 

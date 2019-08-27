@@ -37,10 +37,11 @@ pub struct CharacterJumpSystem;
 
 impl CharacterJumpSystem
 {
-  pub fn calculate_jump_position(progress_normalized: f32, start_pos: f32, end_pos: f32) -> f32
+  pub fn calculate_jump_position(progress_normalized: f32, start_pos: f32, max_height: f32) -> f32
   {
-    let delta = end_pos - start_pos;
-    return math::clamp(progress_normalized, 0.0, 1.0) * delta;
+    //let delta = (start_pos + max_height) - start_pos;
+    //return math::clamp(progress_normalized, 0.0, 1.0) * delta;
+    return math::clamp(progress_normalized, 0.0, 1.0) * max_height;
   }
 }
 
@@ -59,7 +60,9 @@ impl<'s> System<'s> for CharacterJumpSystem
     for (jump_status, input_status, jump_state, transform, mut velocity)
       in (&jump_status_comps, &input_status_comps, &jump_state_comps, &transform_comps, &mut velocity_comps).join()
     {
-      let time_in_jump: Duration = jump_status.jump_begin_moment.elapsed();
+      let time_in_jump: Duration = Instant::now() - jump_status.jump_begin_moment;
+
+      //let time_in_jump: Duration = jump_status.jump_begin_moment.elapsed();
 
       let ground_to_apex_duration: Duration =
         Duration::new(jump_state.time_to_max_height_sec.trunc() as u64, 

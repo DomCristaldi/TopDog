@@ -11,6 +11,7 @@ Prefab(
                 ),
                 jump_movement: CharacterJumpStateComponent(
                     max_jump_height: 20.0,
+                    time_to_max_height_sec: 5.0,
                 ),
                 dimensions: Dimensions(4.0, 16.0),
             ),

@@ -19,7 +19,8 @@ pub fn create_secf_from_duration(duration: Duration) -> f32
 
 pub fn get_progress_into_duration_normalized(progress: Instant, begin: Instant, duration: Duration) -> f32
 {
-  let elapsed_time: Duration = begin.duration_since(progress);
+  //let elapsed_time: Duration = begin.duration_since(progress);
+  let elapsed_time: Duration = progress.duration_since(begin);
 
   match duration.checked_sub(elapsed_time)
   {

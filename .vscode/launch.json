@@ -13,7 +13,7 @@
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
-      "externalConsole": true,
+      "externalConsole": false,
     },
     {
       "name": "(gdb) Release",
@@ -25,7 +25,7 @@
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
-      "externalConsole": true/*false*/,
+      "externalConsole": false,
     },
   ]
 }

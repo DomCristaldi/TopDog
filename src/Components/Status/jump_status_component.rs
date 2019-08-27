@@ -7,6 +7,7 @@ use amethyst::{
     Component,
     DenseVecStorage,
     WriteStorage,
+    FlaggedStorage,
   }
 };
 
@@ -35,5 +36,6 @@ impl JumpStatusComponent
 
 impl Component for JumpStatusComponent
 {
-  type Storage = DenseVecStorage<Self>;
+  //type Storage = DenseVecStorage<Self>;
+  type Storage = FlaggedStorage<Self, DenseVecStorage<Self>>;
 }
