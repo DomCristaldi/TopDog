@@ -7,6 +7,9 @@ pub use self::character_movement_system::CharacterMovementSystem;
 mod character_jump_system;
 pub use character_jump_system::CharacterJumpSystem;
 
+mod character_fall_system;
+pub use character_fall_system::CharacterFallSystem;
+
 mod character_status_system;
 pub use self::character_status_system::CharacterStatusSystem;
 

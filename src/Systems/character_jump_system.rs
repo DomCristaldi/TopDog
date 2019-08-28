@@ -48,17 +48,17 @@ impl CharacterJumpSystem
 impl<'s> System<'s> for CharacterJumpSystem
 {
   type SystemData = (
-    ReadStorage<'s, JumpStatusComponent>,
+    WriteStorage<'s, JumpStatusComponent>,
     ReadStorage<'s, InputStatusComponent>,
     ReadStorage<'s, CharacterJumpStateComponent>,
     ReadStorage<'s, Transform>,
     WriteStorage<'s, Velocity2D>,
   );
 
-  fn run(&mut self, (jump_status_comps, input_status_comps, jump_state_comps, transform_comps, mut velocity_comps): Self::SystemData)
+  fn run(&mut self, (mut jump_status_comps, input_status_comps, jump_state_comps, transform_comps, mut velocity_comps): Self::SystemData)
   {
-    for (jump_status, input_status, jump_state, transform, mut velocity)
-      in (&jump_status_comps, &input_status_comps, &jump_state_comps, &transform_comps, &mut velocity_comps).join()
+    for (mut jump_status, input_status, jump_state, transform, mut velocity)
+      in (&mut jump_status_comps, &input_status_comps, &jump_state_comps, &transform_comps, &mut velocity_comps).join()
     {
       let time_in_jump: Duration = Instant::now() - jump_status.jump_begin_moment;
 
@@ -68,12 +68,16 @@ impl<'s> System<'s> for CharacterJumpSystem
 
       let progress_to_apex: f32 = time::get_progress_into_duration_normalized(Instant::now(), jump_status.jump_begin_moment, ground_to_apex_duration);
 
-
       let desired_height: f32 = CharacterJumpSystem::calculate_jump_position(progress_to_apex, jump_status.jump_begin_loc.y, jump_state.max_jump_height);
 
       let desired_velocity = desired_height - transform.translation().y;
 
       velocity.vel.y = desired_velocity;
+
+      if (progress_to_apex >= 1.0)
+      {
+        jump_status.has_reached_apex = true;
+      }
     }
   }
 }

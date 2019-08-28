@@ -51,6 +51,7 @@ fn main() -> amethyst::Result<()> {
         .with(Systems::CharacterStatusSystem, "character_status_system", &["input_system"])
         .with(Systems::CharacterMovementSystem, "character_movement_system", &["character_input_system", "character_status_system"])
         .with(Systems::CharacterJumpSystem, "character_jump_system", &["character_input_system", "character_status_system"])
+        .with(Systems::CharacterFallSystem, "character_fall_system", &["character_input_system", "character_status_system"])
         .with(Systems::EntityMoverSystem, "entity_mover_system", &["character_movement_system"])
         .with_bundle(
           RenderingBundle::<DefaultBackend>::new()

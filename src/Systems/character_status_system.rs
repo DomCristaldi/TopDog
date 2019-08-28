@@ -66,6 +66,16 @@ impl<'a> System<'a> for CharacterStatusSystem
       }
     }
 
+    for (entity, jump_status) in (&entities, &jump_status_comps).join()
+    {
+      if (jump_status.has_reached_apex)
+      {
+        lazy_updater.remove::<Status::JumpStatusComponent>(entity);
+
+        lazy_updater.insert(entity, Status::FallStatusComponent::default());
+      }
+    }
+
     /*lazy_updater.exec_mut(move |world|
     {
       world.maintain();
