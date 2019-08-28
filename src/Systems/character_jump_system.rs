@@ -41,7 +41,7 @@ impl CharacterJumpSystem
   {
     //let delta = (start_pos + max_height) - start_pos;
     //return math::clamp(progress_normalized, 0.0, 1.0) * delta;
-    return math::clamp(progress_normalized, 0.0, 1.0) * max_height;
+    return start_pos + (math::clamp(progress_normalized, 0.0, 1.0) * max_height);
   }
 }
 
@@ -62,13 +62,9 @@ impl<'s> System<'s> for CharacterJumpSystem
     {
       let time_in_jump: Duration = Instant::now() - jump_status.jump_begin_moment;
 
-      //let time_in_jump: Duration = jump_status.jump_begin_moment.elapsed();
-
       let ground_to_apex_duration: Duration =
         Duration::new(jump_state.time_to_max_height_sec.trunc() as u64, 
           (jump_state.time_to_max_height_sec.fract() * f32::powi(10.0, 9)) as u32);
-
-      //let duration_to_apex: Duration = ground_to_apex_duration - time_in_jump;
 
       let progress_to_apex: f32 = time::get_progress_into_duration_normalized(Instant::now(), jump_status.jump_begin_moment, ground_to_apex_duration);
 
@@ -78,10 +74,6 @@ impl<'s> System<'s> for CharacterJumpSystem
       let desired_velocity = desired_height - transform.translation().y;
 
       velocity.vel.y = desired_velocity;
-
-      //let dur: f32 = (duration_to_apex.as_secs() as f32) + duration;
-
-      //let jump_apex_moment = jump_status.jump_begin_moment
     }
   }
 }
