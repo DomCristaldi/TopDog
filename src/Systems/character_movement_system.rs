@@ -21,7 +21,7 @@ use crate::{
     InputStatusComponent,
     Velocity2D_Init,
     Velocity2D,
-    Movement::{
+    Attributes::{
       CharacterMovementStateComponent,
     },
   },

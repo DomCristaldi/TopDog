@@ -26,9 +26,10 @@ use {
 use crate::{
   Components::{
     Dimensions,
-    Movement::{
+    Attributes::{
       CharacterMovementStateComponent,
       CharacterJumpStateComponent,
+      MassAttribute,
     },
   },
 };
@@ -40,6 +41,7 @@ pub struct PaddlePrefab
 {
   pub character_movement: CharacterMovementStateComponent,
   pub jump_movement: CharacterJumpStateComponent,
+  pub mass: MassAttribute,
   pub dimensions: Dimensions,
 }
 

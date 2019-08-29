@@ -22,7 +22,7 @@ use crate::{
   Components::{
     InputStatusComponent,
     Velocity2D,
-    Movement::{
+    Attributes::{
       CharacterJumpStateComponent,
     },
     Status::{

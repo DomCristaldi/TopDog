@@ -38,7 +38,7 @@ use crate::{
         Velocity2D,
         Velocity2D_Init,
         Dimensions,
-        Movement::{
+        Attributes::{
             CharacterMovementStateComponent,
         },
     },

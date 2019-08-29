@@ -19,7 +19,7 @@ use serde::{
 
 use crate::{
   Components::{
-    Movement::{
+    Attributes::{
       CharacterMovementStateComponent,
     },
   }
