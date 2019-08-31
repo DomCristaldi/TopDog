@@ -42,7 +42,7 @@ fn main() -> amethyst::Result<()> {
 
     let game_data = GameDataBuilder::default()
         .with( PrefabLoaderSystem::<Prefabs::PaddlePrefab>::default(), "paddle_loader", &[] )
-        .with( PrefabLoaderSystem::<Entities::GameCamera>::default(), "game_camera_loader", &[] )
+        .with( PrefabLoaderSystem::<Prefabs::CameraPrefabData>::default(), "game_camera_loader", &[] )
         .with_bundle(
             InputBundle::<StringBindings>::new()
                 .with_bindings_from_file(input_binding_path)?,

@@ -1,0 +1,18 @@
+#![enable(implicit_some)]
+
+Prefab (
+  entities: [
+    PrefabEntity(
+      data: CameraPrefabData(
+        //projection: Orthographic(
+          left: -300.0,
+          right: 300.0,
+          bottom: -300.0,
+          top: 300.0,
+          z_near: -30.0, 
+          z_far: 30.0,
+        //),
+      ),
+    ),
+  ],
+)

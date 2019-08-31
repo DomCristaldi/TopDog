@@ -48,18 +48,10 @@ pub struct PaddlePrefab
 impl PaddlePrefab
 {
   pub fn retrieve_prefab_handle(world: &mut World) -> Handle<Prefab<PaddlePrefab>>
+  {
+    world.exec( |loader: PrefabLoader<'_, PaddlePrefab>|
     {
-        let prefab_handle = world.exec(
-            |loader: PrefabLoader<'_, PaddlePrefab>|
-            {
-                loader.load(
-                    "paddle.ron",
-                    RonFormat,
-                    ()
-                )
-            }
-        );
-
-        return prefab_handle;
-    }
+      loader.load( "paddle.ron", RonFormat, ())
+    })
+  }
 }
