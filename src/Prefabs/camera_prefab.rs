@@ -1,30 +1,14 @@
 use amethyst::{
   prelude::Builder,
-  assets::{
-    Handle, Prefab, PrefabData, PrefabLoader, RonFormat, ProgressCounter,
-  },
-  core::{
-    Transform,
-  },
-  derive::{
-    PrefabData,
-  },
-  ecs::{
-    Component, Entity, World, WriteStorage,
-  },
+  assets::{ Handle, Prefab, PrefabData, PrefabLoader, RonFormat, ProgressCounter, },
+  core::{ Transform, },
+  derive::{ PrefabData, },
+  ecs::{ Component, Entity, World, WriteStorage, },
   error::Error,
-  renderer::camera::{
-    //Camera, Projection,
-    Camera,
-    CameraPrefab,
-
-  },
+  renderer::camera::{ Camera,CameraPrefab, },
 };
 
-use serde::{
-  Serialize,
-  Deserialize,
-};
+use serde::{ Serialize, Deserialize, };
 
 use crate::StaticData::StaticData;
 
