@@ -14,14 +14,12 @@ use amethyst::{
   },
   error::Error,
   renderer::camera::{
-      Camera, Projection,
-    },
-};
+    //Camera, Projection,
+    Camera,
+    CameraPrefab,
 
-/*extern crate amethyst_rendy;
-use amethyst_rendy::{
-  camera::CameraPrefab,
-};*/
+  },
+};
 
 use serde::{
   Serialize,
@@ -31,50 +29,12 @@ use serde::{
 use crate::StaticData::StaticData;
 
 
-
-
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PrefabData)]
 #[serde(deny_unknown_fields)]
 pub struct CameraPrefabData
 {
-  //pub projection: Projection,
-  pub left: f32,
-  pub right: f32,
-  pub bottom: f32,
-  pub top: f32,
-  pub z_near: f32,
-  pub z_far: f32,
-}
-
-impl<'a> PrefabData<'a> for CameraPrefabData
-{
-  type SystemData = WriteStorage<'a, Camera>;
-
-  type Result = ();
-
-  fn add_to_entity(
-    &self,
-    entity: Entity,
-    camera_storage: &mut Self::SystemData,
-    entities: &[Entity],
-    children: &[Entity]
-  ) -> Result<(), Error>
-  {
-    let projection = Projection::orthographic(
-      self.left,
-      self.right,
-      self.bottom,
-      self.top,
-      self.z_near,
-      self.z_far);
-
-    let camera = Camera::from(projection);
-    //let camera = Camera::from(self.projection.clone());
-
-    camera_storage.insert(entity, camera).map(|_| ())?;
-
-    Ok(())
-  }
+  pub transform: Transform,
+  pub camera: CameraPrefab,
 }
 
 impl CameraPrefabData
@@ -98,7 +58,6 @@ impl CameraPrefabData
     world
         .create_entity()
         .with(prefab_handle.clone())
-        .with(transform)
         .build();
   }
 }

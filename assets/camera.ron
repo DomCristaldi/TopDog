@@ -3,15 +3,19 @@
 Prefab (
   entities: [
     PrefabEntity(
-      data: CameraPrefabData(
-        //projection: Orthographic(
+      data: (
+        transform: Transform(
+          translation: (50.0, 50.0, 1.0),
+          rotation: (0.0, 0.0, 0.0, 1.0),
+        ),
+        camera: Orthographic(
           left: -300.0,
           right: 300.0,
           bottom: -300.0,
           top: 300.0,
-          z_near: -30.0, 
-          z_far: 30.0,
-        //),
+          znear: -30.0, 
+          zfar: 30.0,
+        ),
       ),
     ),
   ],
