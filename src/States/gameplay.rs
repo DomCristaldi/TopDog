@@ -7,10 +7,10 @@ use amethyst::{
 use crate::{
     Entities::{
         PaddleEntity,
+        GroundEntity,
         //GameCamera,
     },
-    Prefabs::
-    {
+    Prefabs::{
         CameraPrefabData,
     },
     StaticData::StaticData,
@@ -39,7 +39,9 @@ impl SimpleState for Gameplay {
         //initialize_camera(world);
 
         //GameCamera::initialize(world);
-        CameraPrefabData::initialize(world);
+        GroundEntity::initialize(world);
         PaddleEntity::initialize(world);
+        CameraPrefabData::initialize(world);
+
     }
 }

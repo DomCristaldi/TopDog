@@ -2,7 +2,6 @@
 /*#![feature(duration_float)]*/
 
 extern crate amethyst;
-
 use amethyst::{
     prelude::*,
     assets::PrefabLoaderSystem,
@@ -12,12 +11,14 @@ use amethyst::{
         StringBindings,
     },
     renderer::{
-        plugins::{RenderFlat2D, RenderToWindow},
+        plugins::{RenderFlat2D, RenderToWindow, RenderDebugLines,},
         types::DefaultBackend,
         RenderingBundle
     },
     utils::application_root_dir,
 };
+
+extern crate specs_physics;
 
 mod StaticData;
 mod States;
@@ -25,6 +26,7 @@ mod Entities;
 mod Resources;
 mod DataTypes;
 mod Systems;
+//mod Systems{Physics::*};
 mod Components;
 mod Prefabs;
 mod Utility;
@@ -47,12 +49,13 @@ fn main() -> amethyst::Result<()> {
             InputBundle::<StringBindings>::new()
                 .with_bindings_from_file(input_binding_path)?,
         )?
+        .with_bundle(Systems::Physics::PhysicsBundle::new())?
         .with(Systems::CharacterInputSystem, "character_input_system", &["input_system"])
         .with(Systems::CharacterStatusSystem, "character_status_system", &["input_system"])
         .with(Systems::CharacterMovementSystem, "character_movement_system", &["character_input_system", "character_status_system"])
         .with(Systems::CharacterJumpSystem, "character_jump_system", &["character_input_system", "character_status_system"])
         .with(Systems::CharacterFallSystem, "character_fall_system", &["character_input_system", "character_status_system"])
-        .with(Systems::EntityMoverSystem, "entity_mover_system", &["character_movement_system"])
+        .with(Systems::EntityMoverSystem::default(), "entity_mover_system", &["character_movement_system"])
         .with_bundle(
           RenderingBundle::<DefaultBackend>::new()
             // The RenderToWindow plugin provides all the scaffolding for opening a window and drawing on it
@@ -62,14 +65,17 @@ fn main() -> amethyst::Result<()> {
             )
             
             // RenderFlat2D plugin is used to render entities with a "SpriteRender" copmonent
-            .with_plugin(
-                RenderFlat2D::default()
-            ),
+            .with_plugin( RenderFlat2D::default() )
+            .with_plugin( RenderDebugLines::default() )
         )?
         .with_bundle(TransformBundle::new())?
+        .with(Systems::Debug::DebugDrawColliderSystem, "debug_draw_collider_system", &[])
         ;
 
     let mut game = Application::new(assets_dir, States::Gameplay, game_data)?;
+
+    //let mut dispatcher = physics_dispatcher::<f32, SimplePosition<f32>>();
+    //dispatcher.setup(&mut game.world);
 
     game.run();
 

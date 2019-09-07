@@ -1,3 +1,6 @@
+pub mod Physics;
+pub mod Debug;
+
 mod character_input_system;
 pub use self::character_input_system::CharacterInputSystem;
 
