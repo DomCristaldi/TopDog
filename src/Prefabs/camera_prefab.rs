@@ -1,5 +1,6 @@
 use amethyst::{
   prelude::Builder,
+  prelude::*,
   assets::{ Handle, Prefab, PrefabData, PrefabLoader, RonFormat, ProgressCounter, },
   core::{ Transform, },
   derive::{ PrefabData, },

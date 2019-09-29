@@ -5,7 +5,7 @@ extern crate amethyst;
 
 use amethyst::{
     prelude::*,
-    assets::PrefabLoaderSystem,
+    assets::PrefabLoaderSystemDesc,
     core::transform::TransformBundle,
     input::{
         InputBundle,
@@ -41,8 +41,8 @@ fn main() -> amethyst::Result<()> {
 
 
     let game_data = GameDataBuilder::default()
-        .with( PrefabLoaderSystem::<Prefabs::PaddlePrefab>::default(), "paddle_loader", &[] )
-        .with( PrefabLoaderSystem::<Prefabs::CameraPrefabData>::default(), "game_camera_loader", &[] )
+        .with_system_desc( PrefabLoaderSystemDesc::<Prefabs::PaddlePrefab>::default(), "paddle_loader", &[] )
+        .with_system_desc( PrefabLoaderSystemDesc::<Prefabs::CameraPrefabData>::default(), "game_camera_loader", &[] )
         .with_bundle(
             InputBundle::<StringBindings>::new()
                 .with_bindings_from_file(input_binding_path)?,

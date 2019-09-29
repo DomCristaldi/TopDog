@@ -13,7 +13,7 @@ use amethyst::{
 use serde::{ Serialize, Deserialize };
 
 
-#[derive(Clone, Copy, Debug, Serialize, Deserialize, PrefabData)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize, Default, PrefabData)]
 #[prefab(Component)]
 #[serde(deny_unknown_fields)]
 pub struct CharacterJumpStateComponent
