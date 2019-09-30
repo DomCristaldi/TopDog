@@ -12,7 +12,7 @@ use amethyst::{
         StringBindings,
     },
     renderer::{
-        plugins::{RenderFlat2D, RenderToWindow},
+        plugins::{ RenderFlat2D, RenderToWindow, RenderDebugLines },
         types::DefaultBackend,
         RenderingBundle
     },
@@ -53,6 +53,9 @@ fn main() -> amethyst::Result<()> {
         .with(Systems::CharacterJumpSystem, "character_jump_system", &["character_input_system", "character_status_system"])
         .with(Systems::CharacterFallSystem, "character_fall_system", &["character_input_system", "character_status_system"])
         .with(Systems::EntityMoverSystem, "entity_mover_system", &["character_movement_system"])
+
+        .with(Systems::Debug::DebugLineDrawer_Colliders_System, "debug_lines_drawer_colliders_system", &[])
+
         .with_bundle(
           RenderingBundle::<DefaultBackend>::new()
             // The RenderToWindow plugin provides all the scaffolding for opening a window and drawing on it
@@ -64,7 +67,9 @@ fn main() -> amethyst::Result<()> {
             // RenderFlat2D plugin is used to render entities with a "SpriteRender" copmonent
             .with_plugin(
                 RenderFlat2D::default()
-            ),
+            )
+
+            .with_plugin(RenderDebugLines::default()),
         )?
         .with_bundle(TransformBundle::new())?
         ;

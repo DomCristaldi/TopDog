@@ -16,7 +16,7 @@ Prefab(
                 mass: MassAttribute(
                     mass: 0.03,
                 ),
-                dimensions: Dimensions(4.0, 16.0),
+                dimensions: Dimensions(25.0, 32.0),
             ),
         ),
     ],

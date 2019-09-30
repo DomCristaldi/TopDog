@@ -22,7 +22,7 @@ use amethyst::{
         WriteStorage 
         },
     renderer::{
-        SpriteRender,
+        SpriteRender, debug_drawing::DebugLinesComponent,
     },
     utils::scene::BasicScenePrefab,
 };
@@ -81,6 +81,9 @@ impl PaddleEntity
                 player_index: 0,
             })
             .with(Velocity2D::new(Velocity2D_Init::Components(0.0, 0.0, 0.0)))
+
+            .with(DebugLinesComponent::default())
+
             .build();
     }
 }
