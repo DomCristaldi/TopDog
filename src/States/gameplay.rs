@@ -8,6 +8,7 @@ use crate::{
     Entities::{
         PaddleEntity,
         //GameCamera,
+        CollisionSurfaceEntity,
     },
     Prefabs::
     {
@@ -41,5 +42,7 @@ impl SimpleState for Gameplay {
         //GameCamera::initialize(world);
         CameraPrefabData::initialize(world);
         PaddleEntity::initialize(world);
+
+        CollisionSurfaceEntity::initialize(world);
     }
 }

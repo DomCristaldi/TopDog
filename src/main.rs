@@ -19,6 +19,9 @@ use amethyst::{
     utils::application_root_dir,
 };
 
+use amethyst_physics::PhysicsBundle;
+use amethyst_nphysics::NPhysicsBackend;
+
 mod StaticData;
 mod States;
 mod Entities;
@@ -43,6 +46,7 @@ fn main() -> amethyst::Result<()> {
     let game_data = GameDataBuilder::default()
         .with_system_desc( PrefabLoaderSystemDesc::<Prefabs::PaddlePrefab>::default(), "paddle_loader", &[] )
         .with_system_desc( PrefabLoaderSystemDesc::<Prefabs::CameraPrefabData>::default(), "game_camera_loader", &[] )
+        .with_system_desc( PrefabLoaderSystemDesc::<Prefabs::CollidableSurfacePrefab>::default(), "collision_surface_loader", &[] )
         .with_bundle(
             InputBundle::<StringBindings>::new()
                 .with_bindings_from_file(input_binding_path)?,
@@ -54,7 +58,9 @@ fn main() -> amethyst::Result<()> {
         .with(Systems::CharacterFallSystem, "character_fall_system", &["character_input_system", "character_status_system"])
         .with(Systems::EntityMoverSystem, "entity_mover_system", &["character_movement_system"])
 
-        .with(Systems::Debug::DebugLineDrawer_Colliders_System, "debug_lines_drawer_colliders_system", &[])
+        .with_bundle(TransformBundle::new())?
+
+        .with_bundle( PhysicsBundle::<f32, NPhysicsBackend>::new() )?
 
         .with_bundle(
           RenderingBundle::<DefaultBackend>::new()
@@ -71,7 +77,10 @@ fn main() -> amethyst::Result<()> {
 
             .with_plugin(RenderDebugLines::default()),
         )?
-        .with_bundle(TransformBundle::new())?
+        .with(Systems::Debug::DebugLinesClearer, "debug_lines_clearer", &[])
+        .with(Systems::Debug::DebugLineDrawer_Dimensions_System, "debugLinesDrawer_dimensions_system", &["debug_lines_clearer"])
+        .with(Systems::Debug::DebugLineDrawer_Colliders_System, "debugLinesDrawer_colliders_system", &["debug_lines_clearer"])
+
         ;
 
     let mut game = Application::new(assets_dir, States::Gameplay, game_data)?;

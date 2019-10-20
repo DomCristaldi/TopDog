@@ -1,5 +1,6 @@
 pub mod Attributes;
 pub mod Status;
+pub mod Debug;
 //pub use self::Status;
 
 mod input_status_component;

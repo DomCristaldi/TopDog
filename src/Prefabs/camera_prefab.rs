@@ -33,7 +33,7 @@ impl CameraPrefabData
     })
   }
 
-    pub fn initialize(world: &mut World)
+  pub fn initialize(world: &mut World)
   {
     let prefab_handle: Handle<Prefab<CameraPrefabData>> = CameraPrefabData::retrieve_prefab_handle(world);
 
