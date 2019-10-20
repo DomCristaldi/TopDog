@@ -5,17 +5,14 @@ use amethyst::{
     },
     core::math,
     derive::PrefabData,
-    ecs::Entity,
-    ecs::prelude::{
-        Component,
-        DenseVecStorage,
-        WriteStorage 
+    ecs::{
+        Entity, Component, DenseVecStorage, WriteStorage,
     },
     utils::scene::BasicScenePrefab,
 };
 
 use serde::{Deserialize, Serialize};
-use specs_derive::Component;
+//use specs_derive::Component;
 
 
 #[derive(Clone, Copy, Debug, Default, Component, Serialize, Deserialize, PrefabData)]

@@ -22,6 +22,7 @@ use amethyst::{
 use amethyst_physics::PhysicsBundle;
 use amethyst_nphysics::NPhysicsBackend;
 
+mod Compatability;
 mod StaticData;
 mod States;
 mod Entities;
@@ -56,12 +57,16 @@ fn main() -> amethyst::Result<()> {
         .with(Systems::CharacterMovementSystem, "character_movement_system", &["character_input_system", "character_status_system"])
         .with(Systems::CharacterJumpSystem, "character_jump_system", &["character_input_system", "character_status_system"])
         .with(Systems::CharacterFallSystem, "character_fall_system", &["character_input_system", "character_status_system"])
-        .with(Systems::EntityMoverSystem, "entity_mover_system", &["character_movement_system"])
+        //.with(Systems::EntityMoverSystem, "entity_mover_system", &["character_movement_system"])
+
+        //.with(Systems::Physics::PhysicalCharacterMoverSystem, "physical_character_mover_sys", &["character_movement_system"])
 
         .with_bundle(TransformBundle::new())?
 
-        .with_bundle( PhysicsBundle::<f32, NPhysicsBackend>::new() )?
-
+        .with_bundle( PhysicsBundle::<f32, NPhysicsBackend>::new()
+            .with_pre_physics(Systems::Physics::PhysicalCharacterMoverSystem, String::from("physical_character_mover_sys"), vec![])
+        )?
+ 
         .with_bundle(
           RenderingBundle::<DefaultBackend>::new()
             // The RenderToWindow plugin provides all the scaffolding for opening a window and drawing on it

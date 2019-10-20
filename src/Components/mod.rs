@@ -24,3 +24,6 @@ pub use self::character_attributes::*;
 
 mod velocity_component;
 pub use self::velocity_component::{Velocity2D, Velocity2D_Init};
+
+mod tags;
+pub use self::tags::*;
