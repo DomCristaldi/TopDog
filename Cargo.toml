@@ -12,13 +12,18 @@ resources = ["/resources"]
 
 
 [dependencies]
-amethyst = {version = "0.13.0" }
+amethyst = { version = "0.13.2" }
 #amethyst_rendy = {version = "0.2.0"}
 serde = { version = "1.0", features = ["derive"] }
 specs-derive = "0.4"
-derivative = "1.0.2"
+derivative = "1.0.3"
 
-ncollide2d = "0.20.1" # For 2D collision detection.
+amethyst-imgui = { version = "0.5" }
+
+amethyst_physics = "0.1.0"
+amethyst_nphysics = "0.1.0"
+
+#ncollide2d = { version = "0.20.1", features =["serde"] }# For 2D collision detection.
 #shred = { version = "0.9.2"}
 
 #strum = "0.15.0"

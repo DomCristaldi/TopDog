@@ -16,9 +16,9 @@ use crate::{
 };
 
 
-pub struct DebugLineDrawer_Colliders_System;
+pub struct DebugLineDrawer_Dimensions_System;
 
-impl<'a> System<'a> for DebugLineDrawer_Colliders_System
+impl<'a> System<'a> for DebugLineDrawer_Dimensions_System
 {
   type SystemData = (
     //Write<'a, DebugLines>,
@@ -33,7 +33,7 @@ impl<'a> System<'a> for DebugLineDrawer_Colliders_System
     for (mut debug_lines, dimensions, transform)
       in (&mut debug_lines_comps, &dimensions_comps, &transform_comps).join()
     {
-      debug_lines.clear();
+      //debug_lines.clear();
 
       let Components::Dimensions(dim_x, dim_y) = dimensions;
       let rect_extents: Vector3<f32> = Vector3::new(dim_x / 2.0, dim_y / 2.0, 0.0);

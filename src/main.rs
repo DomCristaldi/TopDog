@@ -2,6 +2,7 @@
 /*#![feature(duration_float)]*/
 
 extern crate amethyst;
+extern crate amethyst_imgui;
 
 use amethyst::{
     prelude::*,
@@ -19,6 +20,10 @@ use amethyst::{
     utils::application_root_dir,
 };
 
+use amethyst_physics::PhysicsBundle;
+use amethyst_nphysics::NPhysicsBackend;
+
+mod Compatability;
 mod StaticData;
 mod States;
 mod Entities;
@@ -28,6 +33,8 @@ mod Systems;
 mod Components;
 mod Prefabs;
 mod Utility;
+
+mod Editor;
 
 fn main() -> amethyst::Result<()> {
 
@@ -43,6 +50,7 @@ fn main() -> amethyst::Result<()> {
     let game_data = GameDataBuilder::default()
         .with_system_desc( PrefabLoaderSystemDesc::<Prefabs::PaddlePrefab>::default(), "paddle_loader", &[] )
         .with_system_desc( PrefabLoaderSystemDesc::<Prefabs::CameraPrefabData>::default(), "game_camera_loader", &[] )
+        .with_system_desc( PrefabLoaderSystemDesc::<Prefabs::CollidableSurfacePrefab>::default(), "collision_surface_loader", &[] )
         .with_bundle(
             InputBundle::<StringBindings>::new()
                 .with_bindings_from_file(input_binding_path)?,
@@ -52,9 +60,21 @@ fn main() -> amethyst::Result<()> {
         .with(Systems::CharacterMovementSystem, "character_movement_system", &["character_input_system", "character_status_system"])
         .with(Systems::CharacterJumpSystem, "character_jump_system", &["character_input_system", "character_status_system"])
         .with(Systems::CharacterFallSystem, "character_fall_system", &["character_input_system", "character_status_system"])
-        .with(Systems::EntityMoverSystem, "entity_mover_system", &["character_movement_system"])
+        //.with(Systems::EntityMoverSystem, "entity_mover_system", &["character_movement_system"])
 
-        .with(Systems::Debug::DebugLineDrawer_Colliders_System, "debug_lines_drawer_colliders_system", &[])
+        //.with(Systems::Physics::PhysicalCharacterMoverSystem, "physical_character_mover_sys", &["character_movement_system"])
+
+        .with_bundle(TransformBundle::new())?
+
+        .with_bundle( PhysicsBundle::<f32, NPhysicsBackend>::new()
+            .with_pre_physics(Systems::Physics::PhysicalCharacterMoverSystem, String::from("physical_character_mover_sys"), vec![])
+        )?
+
+        .with(Systems::Debug::DebugLinesClearer, "debug_lines_clearer", &[])
+        .with(Systems::Debug::DebugLineDrawer_Dimensions_System, "debugLinesDrawer_dimensions_system", &["debug_lines_clearer"])
+        .with(Systems::Debug::DebugLineDrawer_Colliders_System, "debugLinesDrawer_colliders_system", &["debug_lines_clearer"])
+ 
+        .with(Editor::Systems::ImguiOverlaySystem::default(), "imgui_overlay_system", &[])
 
         .with_bundle(
           RenderingBundle::<DefaultBackend>::new()
@@ -69,9 +89,10 @@ fn main() -> amethyst::Result<()> {
                 RenderFlat2D::default()
             )
 
-            .with_plugin(RenderDebugLines::default()),
+            .with_plugin(RenderDebugLines::default())
+
+            .with_plugin(amethyst_imgui::RenderImgui::<StringBindings>::default())
         )?
-        .with_bundle(TransformBundle::new())?
         ;
 
     let mut game = Application::new(assets_dir, States::Gameplay, game_data)?;

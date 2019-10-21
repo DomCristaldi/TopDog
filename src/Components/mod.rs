@@ -1,5 +1,6 @@
 pub mod Attributes;
 pub mod Status;
+pub mod Debug;
 //pub use self::Status;
 
 mod input_status_component;
@@ -23,3 +24,6 @@ pub use self::character_attributes::*;
 
 mod velocity_component;
 pub use self::velocity_component::{Velocity2D, Velocity2D_Init};
+
+mod tags;
+pub use self::tags::*;
