@@ -2,6 +2,7 @@
 /*#![feature(duration_float)]*/
 
 extern crate amethyst;
+extern crate amethyst_imgui;
 
 use amethyst::{
     prelude::*,
@@ -32,6 +33,8 @@ mod Systems;
 mod Components;
 mod Prefabs;
 mod Utility;
+
+mod Editor;
 
 fn main() -> amethyst::Result<()> {
 
@@ -66,7 +69,13 @@ fn main() -> amethyst::Result<()> {
         .with_bundle( PhysicsBundle::<f32, NPhysicsBackend>::new()
             .with_pre_physics(Systems::Physics::PhysicalCharacterMoverSystem, String::from("physical_character_mover_sys"), vec![])
         )?
+
+        .with(Systems::Debug::DebugLinesClearer, "debug_lines_clearer", &[])
+        .with(Systems::Debug::DebugLineDrawer_Dimensions_System, "debugLinesDrawer_dimensions_system", &["debug_lines_clearer"])
+        .with(Systems::Debug::DebugLineDrawer_Colliders_System, "debugLinesDrawer_colliders_system", &["debug_lines_clearer"])
  
+        .with(Editor::Systems::ImguiOverlaySystem::default(), "imgui_overlay_system", &[])
+
         .with_bundle(
           RenderingBundle::<DefaultBackend>::new()
             // The RenderToWindow plugin provides all the scaffolding for opening a window and drawing on it
@@ -80,12 +89,10 @@ fn main() -> amethyst::Result<()> {
                 RenderFlat2D::default()
             )
 
-            .with_plugin(RenderDebugLines::default()),
-        )?
-        .with(Systems::Debug::DebugLinesClearer, "debug_lines_clearer", &[])
-        .with(Systems::Debug::DebugLineDrawer_Dimensions_System, "debugLinesDrawer_dimensions_system", &["debug_lines_clearer"])
-        .with(Systems::Debug::DebugLineDrawer_Colliders_System, "debugLinesDrawer_colliders_system", &["debug_lines_clearer"])
+            .with_plugin(RenderDebugLines::default())
 
+            .with_plugin(amethyst_imgui::RenderImgui::<StringBindings>::default())
+        )?
         ;
 
     let mut game = Application::new(assets_dir, States::Gameplay, game_data)?;

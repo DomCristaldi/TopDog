@@ -1,3 +1,5 @@
-mod gameplay;
+mod gameplay_state;
+pub use self::gameplay_state::Gameplay;
 
-pub use self::gameplay::Gameplay;
+mod editor_overlay_state;
+pub use self::editor_overlay_state::EditorOverlayState;

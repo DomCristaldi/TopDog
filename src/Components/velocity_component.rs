@@ -17,7 +17,6 @@ use amethyst::{
 use serde::{Deserialize, Serialize};
 use specs_derive::Component;
 
-
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Velocity2D
@@ -84,5 +83,26 @@ impl Velocity2D
         let new_mag: f32 = math::clamp(mag, 0.0, max_magnitude_delta.abs());
 
         self.vel += direc * new_mag;
+    }
+}
+
+
+
+use crate::{
+    Editor::Traits::{
+        ImguiEditorDisplayable,
+    }
+};
+use amethyst_imgui::{
+    imgui,
+    imgui::{ im_str, ImString, },
+};
+
+//impl ImguiEditorDisplayable<amethyst::prelude::World> for Velocity2D
+impl ImguiEditorDisplayable<()> for Velocity2D
+{
+    fn editor_display_mut(&mut self, ui: &imgui::Ui, world: &())
+    {
+        ui.input_float3(im_str!("Velocity"), &mut self.vel.into()).build();
     }
 }
