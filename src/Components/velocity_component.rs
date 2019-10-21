@@ -93,6 +93,7 @@ use crate::{
         ImguiEditorDisplayable,
     }
 };
+
 use amethyst_imgui::{
     imgui,
     imgui::{ im_str, ImString, },
@@ -103,6 +104,8 @@ impl ImguiEditorDisplayable<()> for Velocity2D
 {
     fn editor_display_mut(&mut self, ui: &imgui::Ui, world: &())
     {
-        ui.input_float3(im_str!("Velocity"), &mut self.vel.into()).build();
+        ui.input_float3(im_str!("Velocity"), &mut self.vel.into())
+        .read_only(true)
+        .build();
     }
 }
