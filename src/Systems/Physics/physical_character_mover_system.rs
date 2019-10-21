@@ -35,6 +35,7 @@ impl<'a> System<'a> for PhysicalCharacterMoverSystem
 
     for (rig_bod, vel) in (&rig_bod_handles, &vel2d_comps).join()
     {
+      //phys_world.rigid_body_server().apply_impulse(rig_bod.get(), &vel.vel);
       phys_world.rigid_body_server().set_linear_velocity(rig_bod.get(), &vel.vel);
     }
   }
