@@ -12,15 +12,19 @@ use serde::{
 };
 
 use crate::{
+  //Compatability::{ RigBodyDesc_PrefabData, },
+  Compatability::*,
   Components::{ Dimensions, },
 };
 
-#[derive(Debug, Serialize, Deserialize, PrefabData)]
+#[derive(Debug, Clone, Serialize, Deserialize, PrefabData)]
 #[serde(deny_unknown_fields)]
 pub struct CollidableSurfacePrefab
 {
   pub transform: Transform,
   pub dimensions: Dimensions,
+  pub physical_desc: Option<PhysicsalDesc>,
+  //pub rigidbody: Option<RigBodyDesc_PrefabData>
 }
 
 impl CollidableSurfacePrefab

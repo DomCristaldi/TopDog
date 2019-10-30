@@ -74,22 +74,7 @@ impl PaddleEntity
             sprite_number: 0,
         };
 
-        let rigid_body_comp = {
-            let mut rb_desc = RigidBodyDesc::default();
-            rb_desc.mode = BodyMode::Kinematic;
-            rb_desc.mass = 1.0;
-            rb_desc.bounciness = 0.0;
-            rb_desc.friction = 0.05;
-
-            rb_desc.lock_rotation_z = true;
-            rb_desc.lock_translation_z = true;
-
-            let physics_world = world.fetch::<PhysicsWorld<f32>>();
-
-            physics_world.rigid_body_server().create(&rb_desc)
-        };
-
-        let shape_comp = {
+        /*let shape_comp = {
             let desc = ShapeDesc::Cube {
                 half_extents: Vector3::new(25.0 / 2.0, 32.0 / 2.0, 1.0),
             };
@@ -97,7 +82,7 @@ impl PaddleEntity
             let physics_world = world.fetch::<PhysicsWorld<f32>>();
 
             physics_world.shape_server().create(&desc)
-        };
+        };*/
 
         world
             .create_entity()
@@ -113,8 +98,8 @@ impl PaddleEntity
             })
             .with(Velocity2D::new(Velocity2D_Init::Components(0.0, 0.0, 0.0)))
 
-            .with(rigid_body_comp)
-            .with(shape_comp)
+            //.with(rigid_body_comp)
+            //.with(shape_comp)
 
             .with(DebugLinesComponent::default())
 

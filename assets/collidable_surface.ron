@@ -6,12 +6,21 @@ Prefab(
       data: CollidableSurfacePrefab(
 
         transform: Transform(
-          translation: (00.0, -10.0, 0.0),
+          translation: (0.0, -10.0, 0.0),
           rotation: (0.0, 0.0, 0.0, 1.0),
         ),
 
         dimensions: Dimensions(50.0, 20.0),
         
+        physical_desc: PhysicsalDesc (
+          rigidbody: RigidBody(
+            mode: Static,
+            lock_translation_z: true,
+            lock_rotation_x: true,
+            lock_rotation_y: true,
+            lock_rotation_z: true,
+          ),
+        ),
       ),
     ),
   ]

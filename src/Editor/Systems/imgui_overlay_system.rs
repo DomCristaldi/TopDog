@@ -52,7 +52,7 @@ impl<'a> System<'a> for ImguiOverlaySystem
 {
   type SystemData = (
     ReadExpect<'a, PhysicsWorld<f32>>,
-    ReadStorage<'a, PhysicsHandle<PhysicsRigidBodyTag>>,
+    WriteStorage<'a, PhysicsHandle<PhysicsRigidBodyTag>>,
     WriteStorage<'a, Velocity2D>,
   );
 
@@ -75,12 +75,12 @@ impl<'a> System<'a> for ImguiOverlaySystem
 
       window.build(ui, ||{
 
-        let (phys_world, rigBodTags, mut vel2D_storage) = sys_data;
-        for (rig_bod, mut vel2d) in (&rigBodTags, &mut vel2D_storage).join()
+        let (phys_world, mut rigBodTags, mut vel2D_storage) = sys_data;
+        for (mut rig_bod, mut vel2d) in (&mut rigBodTags, &mut vel2D_storage).join()
         {
           ui.text("test window");
 
-          rig_bod.editor_display(&ui, &phys_world);
+          rig_bod.editor_display_mut(&ui, &phys_world);
 
           vel2d.editor_display_mut(&ui, &());
         }

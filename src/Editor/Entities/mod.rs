@@ -1,0 +1,1 @@
+mod character_inspector_entity;

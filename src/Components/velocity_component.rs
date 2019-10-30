@@ -104,8 +104,16 @@ impl ImguiEditorDisplayable<()> for Velocity2D
 {
     fn editor_display_mut(&mut self, ui: &imgui::Ui, world: &())
     {
-        ui.input_float3(im_str!("Velocity"), &mut self.vel.into())
-        .read_only(true)
+
+        let mut v = self.vel.into();
+        let confirmed: bool = ui.input_float3(im_str!("Velocity"), &mut v)
+        .read_only(false)
+        .enter_returns_true(true)
         .build();
+
+        if (confirmed)
+        {
+            self.vel = math::Vector3::<f32>::from(v);
+        }
     }
 }

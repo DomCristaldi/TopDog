@@ -14,7 +14,7 @@ use serde::{ Serialize, Deserialize, };
 use crate::StaticData::StaticData;
 
 
-#[derive(Debug, Serialize, Deserialize, PrefabData)]
+#[derive(Debug, Clone, Serialize, Deserialize, PrefabData)]
 #[serde(deny_unknown_fields)]
 pub struct CameraPrefabData
 {

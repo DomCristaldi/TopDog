@@ -17,6 +17,18 @@ Prefab(
                     mass: 0.03,
                 ),
                 dimensions: Dimensions(25.0, 32.0),
+
+                physical_desc: PhysicsalDesc (
+                    rigidbody: RigidBody(
+                        mode: Dynamic,
+                        lock_translation_z: true,
+                        lock_rotation_x: true,
+                        lock_rotation_y: true,
+                        lock_rotation_z: true,
+                    ),
+                    //physicalShape: Sphere( radius: 5.0),
+                    physicalShape: Cube ( half_extents: [12.5, 16.0, 1.0] ),
+                ),
             ),
         ),
     ],
