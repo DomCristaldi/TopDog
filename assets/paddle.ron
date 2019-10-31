@@ -26,7 +26,6 @@ Prefab(
                         lock_rotation_y: true,
                         lock_rotation_z: true,
                     ),
-                    //physicalShape: Sphere( radius: 5.0),
                     physicalShape: Cube ( half_extents: [12.5, 16.0, 1.0] ),
                 ),
             ),
