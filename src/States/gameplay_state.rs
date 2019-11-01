@@ -36,12 +36,11 @@ impl SimpleState for Gameplay {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>)
     {
         let world = data.world;
-
-        //initialize_camera(world);
-
-        //GameCamera::initialize(world);
         CameraPrefabData::initialize(world);
-        PaddleEntity::initialize(world);
+
+        let mut transform = Transform::default();
+        transform.set_translation_xyz(0.0, 50.0, 0.0);
+        PaddleEntity::initialize(world, Some(transform));
 
         CollisionSurfaceEntity::initialize(world);
     }

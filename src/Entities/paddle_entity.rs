@@ -7,7 +7,7 @@ use amethyst::{
         AssetStorage, Handle, Prefab, PrefabData, PrefabLoader, PrefabLoaderSystem, ProgressCounter, RonFormat
     },
     core::{
-        math::Vector3,
+        math::{ Vector3, Rotation},
         transform::Transform,
     },
     derive::PrefabData,
@@ -59,13 +59,15 @@ pub struct PaddleEntity;
 
 impl PaddleEntity
 {
-    pub fn initialize(world: &mut World)
+    pub fn initialize(world: &mut World, spawn_transform: Option<Transform>)
     {
         let prefab_handle: Handle<Prefab<PaddlePrefab>> = PaddlePrefab::retrieve_prefab_handle(world);
         //let prefab_handle: Handle<Prefab<Paddle>> = Resources::DataBase::retrieve_prefab_handle(world, "paddle.ron");
 
-        let mut transform = Transform::default();
-        transform.set_translation_xyz(2.0, 50.0, 0.0);
+        //let mut transform = Transform::default();
+        
+        
+        //transform.set_translation_xyz(2.0, 50.0, 0.0);
 
         //Resources::retrieve_spritesheet_handle(world).clone()
 
@@ -84,13 +86,24 @@ impl PaddleEntity
             physics_world.shape_server().create(&desc)
         };*/
 
-        world
-            .create_entity()
+        /*let entity_builder = world.create_entity().with(prefab_handle.clone());
+
+        match spawn_transform
+        {
+            Some(tf) => entity_builder.with(tf),
+            _ => (),
+        }
+
+        entity_builder*/
+
+        world.create_entity()
+            .with(spawn_transform.unwrap_or(Transform::default()))
+
             .with(prefab_handle.clone())
 
             .with(CharacterTag::default())
             
-            .with(transform)
+            //.with(transform)
             .with(sprite_render.clone())
             .with(InputStatusComponent::default())
             .with(PlayerAvatarComponent{
